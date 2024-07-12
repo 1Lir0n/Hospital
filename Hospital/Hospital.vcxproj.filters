@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Line.txt" />
+    <Text Include="Allergies.txt" />
+    <Text Include="File_Explain.txt" />
+    <Text Include="Doctors.txt" />
+    <Text Include="Patients.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Program.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sVisit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pTree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pLine.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dSLL.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Func.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Patients.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="structs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ptree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="svisit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dsll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patients.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

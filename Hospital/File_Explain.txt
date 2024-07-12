@@ -1,0 +1,12 @@
+dsll.h/c = full doctor list using SLL - single linked list 
+func.h/c = all the main have to have functions
+pline.h/c = patients in line - queue
+ptree.h/c = patients in tree - binary search tree
+structs.h/c = main structures - date, doc, visit, patient
+svisit.h/c = stack of all the visits of each patient 
+
+Allergies.txt = all the differnt allergies and their bit value
+Doctors.txt = database of doctors
+File_Explain.txt = this file that explains what each file is resposible for 
+Line.txt = database of all the patients in line
+Patients = database of all patients past and present
