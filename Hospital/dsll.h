@@ -21,8 +21,8 @@ void appendDoctor(DoctorNode** head, Doc data);
 // Delete the entire doctor list
 void deleteDoctorList(DoctorNode** head);  
 
-// Find a doctor by license number
-DoctorNode* findDoctor(DoctorNode* head, const char* license);
+// Find a doctor by name 
+DoctorNode* findDoctor(DoctorNode* head, const char* name);
 
 // Delete a doctor by license number
 void deleteDoctor(DoctorNode** head, const char* license); 

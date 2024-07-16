@@ -5,7 +5,7 @@
 
 // A structure to represent a stack of visits
 typedef struct StackVisit {
-    Visit data;
+    Visit* data;
     struct StackVisit* next;
 } StackVisit;
 
@@ -13,10 +13,10 @@ typedef struct StackVisit {
 // Function declarations for stack operations
 
 // Create a new stack node
-StackVisit* newNode(Visit data);  
+StackVisit* newNode(Visit* data);  
 
 // Push a visit onto the stack
-void push(StackVisit** root, Visit data);
+void push(StackVisit** root, Visit* data);
 
 // Check if the stack is empty
 int isEmpty(StackVisit* root);  
@@ -27,4 +27,7 @@ Visit pop(StackVisit** root);
 // Peek at the top visit on the stack
 Visit peek(StackVisit* root); 
 
+void printAllVisits(StackVisit* root);
+
+void printVisit(Visit* visit);
 #endif // SVISIT_H

@@ -33,13 +33,8 @@ pInTree* findPatient(pTree* tree, const char* id);
 // Delete a patient from the binary tree by ID
 void deletePatient(pTree* tree, const char* id);
 
-// Perform in-order traversal of the tree and apply a function to each patient
-void inOrderPrint(pInTree* node);
+// Perform in-order traversal of the tree and print each patient
+void printAllPatients(pTree* node);
 
-// Perform pre-order traversal of the tree and apply a function to each patient
-void preOrderPrint(pInTree* node);
-
-// Perform post-order traversal of the tree and apply a function to each patient
-void postOrderPrint(pInTree* node);
 
 #endif // !PTREE_H

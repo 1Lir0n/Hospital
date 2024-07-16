@@ -13,7 +13,7 @@
 #include <stdbool.h>
 
 //loads patients data from file into binary search tree
-void loadPatients(pTree** root);
+void loadPatients(DoctorNode* head, pTree** root);
 
 //loads doctors data from file into SSL
 void loadDoctors(DoctorNode** head);
@@ -25,9 +25,12 @@ pQueue loadLine();
 void updateFiles();
 
 //search patients via ID
-Patient* searchPatient(pInTree root, char* id);
+//inside of Patient.c
 
 //prints an error accordinly 
 void displayError(char* errorType);
+
+
+void printDoctors(DoctorNode* doc);
 
 #endif // !FUNC_H

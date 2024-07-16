@@ -3,7 +3,7 @@
 #define PATIENTS_H
 #include <stdbool.h>
 
-struct Patient* createPatient(char* name, char* id, char* allergies);
+struct Patient* createPatient(char* name, char* id, unsigned char allergies);
 struct Visit* createVisit(struct Date arrival,struct Date dismissed, float duration,struct Doc* doctor, char* summary);
 void pushVisit(struct StackVisit** stack, struct Visit* visit);
 
@@ -21,4 +21,8 @@ bool valid_id(char Id[]);
 //clear cache text
 void clear();
 
+//search patients via ID
+struct Patient* searchPatient(struct pInTree root, char* id);
+
+char* getAllergies(struct Patient patient);
 #endif // !PATIENTS_H

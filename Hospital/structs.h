@@ -24,8 +24,8 @@ typedef struct Doc{
 
 //visit structure for patient visit 
 typedef struct Visit{
-	Date tArrival; //date and time of arrival to the clinic
-	Date tDismissed; //date and time of leaving the clinic
+	Date* tArrival; //date and time of arrival to the clinic
+	Date* tDismissed; //date and time of leaving the clinic
 	float Duration; //amount of time in the clinic in hour.min
 	Doc* Doctor; //the attending doctor of the patient
 	char* Summary; //summary of visit if none then NULL

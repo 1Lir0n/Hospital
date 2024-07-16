@@ -4,14 +4,20 @@
 #include "svisit.h"
 #include "ptree.h"
 
-Patient* createNewPatient(char* name, char id[10], unsigned char allergies) {
+Patient* createPatient(char* name, char id[10], unsigned char allergies) {
     Patient* patient = (Patient*)malloc(sizeof(Patient));
-    patient->Name = _strdup(name);
-    strcpy(patient->ID, id);
-    strcpy(patient->Allergies, allergies);
-    patient->Visits = NULL;
-    patient->nVisits = 0;
-    return patient;
+    if (patient != NULL) {
+        patient->Name = _strdup(name);  // _strdup is for Windows; strdup is for POSIX
+        if (patient->Name == NULL) {
+            free(patient);
+            return NULL;
+        }
+        strcpy(patient->ID, id);
+        patient->Allergies = allergies;
+        patient->nVisits = 0;
+        return patient;
+    }
+    return NULL;
 }
 
 void clear() {
@@ -68,11 +74,37 @@ bool isDigit(char digit) {
     else return false;
 }
 
+char* getAllergies(struct Patient patient) {
+    char* allergies = (char*)malloc(100 * sizeof(char)); // Allocate initial memory
+    if (!allergies) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+    allergies[0] = '\0'; // Initialize allergies string as empty
+    char* allergiesList[] = { "Penicillin", "Sulfa", "Opioids", "Anesthetics", "Eggs", "Latex", "Preservatives" };
+
+    int hasAllergies = 0;
+
+    for (int i = 0; i < 7; i++) { // Loop for the correct number of allergies
+        if (patient.Allergies & (1 << i)) {
+            if (hasAllergies) {
+                strcat(allergies, ",");
+            }
+            strcat(allergies, allergiesList[i]);
+            hasAllergies = 1;
+        }
+    }
+    
+    if (!hasAllergies) {
+        strcpy(allergies, "None");
+    }
+
+    return allergies;
+}
 
 //add Patient to tree
 void addPatient(struct pInTree root) {
 
-    printf("Enter Patient's Full Name: ");
     char buffer[256] = { 0 };
     char* name;
     char id[10];
@@ -80,7 +112,8 @@ void addPatient(struct pInTree root) {
     //NAME 
 
     do {
-        printf("Enter member's full name: \n");
+        printf("Enter Patient's Full Name: ");
+
         fgets(buffer, sizeof(buffer), stdin); // Read full name from user input
         buffer[strcspn(buffer, "\n")] = '\0';
         if (!only_letters_and_spaces(buffer)) {
@@ -109,17 +142,19 @@ void addPatient(struct pInTree root) {
     } while (!valid_id(idBuff));
 
     if (searchPatient(root,id)) {
-        printf("An account with this Id already exist. Index(starts from 0):%s\n", searchPatient(root, id));
+        printf("An account with this Id already exist. \n");
         return;
     }
     strcpy(id, idBuff);
 
 
 }
+
+
 Visit* createVisit(Date arrival, Date dismissed, float duration, Doc* doctor, char* summary) {
     Visit* visit = (Visit*)malloc(sizeof(Visit));
-    visit->tArrival = arrival;
-    visit->tDismissed = dismissed;
+    visit->tArrival = &arrival;
+    visit->tDismissed = &dismissed;
     visit->Duration = duration;
     visit->Doctor = doctor;
     visit->Summary = summary ? _strdup(summary) : NULL;
@@ -128,7 +163,12 @@ Visit* createVisit(Date arrival, Date dismissed, float duration, Doc* doctor, ch
 
 void pushVisit(StackVisit** stack, Visit* visit) {
     StackVisit* newNode = (StackVisit*)malloc(sizeof(StackVisit));
-    newNode->data = *visit;
+    newNode->data = visit;
     newNode->next = *stack;
     *stack = newNode;
+}
+
+struct Patient* searchPatient(pInTree root, char* id)
+{
+    return root.tpatient;
 }

@@ -1,23 +1,28 @@
 #include "ptree.h"
 #include <stdlib.h>
 #include <string.h>
-
+#include "svisit.h"
+#include "patients.h"
 // Helper function to create a new tree node
 static pInTree* createTreeNode(Patient* patient) {
-    pInTree* newNode = (pInTree*)malloc(sizeof(pInTree));
-    if (newNode) {
-        newNode->tpatient = patient;
-        newNode->left = NULL;
-        newNode->right = NULL;
+    pInTree* node = (pInTree*)malloc(sizeof(pInTree));
+    if (node == NULL) {
+        fprintf(stderr, "Failed to allocate memory for TreeNode\n");
+        exit(EXIT_FAILURE);
     }
-    return newNode;
+    node->tpatient = patient;  // Initialize patient data
+    node->left = NULL;
+    node->right = NULL;
+    return node;
 }
 
 pTree* createPatientTree() {
     pTree* tree = (pTree*)malloc(sizeof(pTree));
-    if (tree) {
-        tree->root = NULL;
+    if (tree == NULL) {
+        fprintf(stderr, "Failed to allocate memory for tree\n");
+        exit(EXIT_FAILURE);
     }
+    tree->root = NULL;
     return tree;
 }
 
@@ -40,17 +45,20 @@ void destroyPatientTree(pTree* tree) {
 pInTree* insertPatient(pTree* tree, Patient* patient) {
     pInTree** current = &tree->root;
     while (*current) {
-        int cmp = strcmp(patient->ID, (*current)->tpatient->ID);
-        if (cmp < 0) {
-            current = &(*current)->left;
+        if ((*current)->tpatient != NULL) {
+            int cmp = strcmp(patient->ID, (*current)->tpatient->ID);
+            if (cmp < 0) {
+                current = &(*current)->left;
+            }
+            else if (cmp > 0) {
+                current = &(*current)->right;
+            }
+            else {
+                // Duplicate ID, do not insert
+                return NULL;
+            }
         }
-        else if (cmp > 0) {
-            current = &(*current)->right;
-        }
-        else {
-            // Duplicate ID, do not insert
-            return NULL;
-        }
+        else break;
     }
     *current = createTreeNode(patient);
     return *current;
@@ -123,27 +131,28 @@ void deletePatient(pTree* tree, const char* id) {
         tree->root = deletePatientNode(tree->root, id);
     }
 }
-
-void inOrderPrint(pInTree* node) {
-    if (node) {
-        inOrderPrint(node->left);
-        printf("Name:%s, ID:%s", node->tpatient->Name, node->tpatient->ID);
-        inOrderPrint(node->right);
+// Function to print patient details (modify as per your structure)
+void printPatient(Patient* patient) {
+    if (patient == NULL) {
+        printf("Patient data is NULL\n");
+        return;
     }
+    printf("Name: %s, ID:%s, Allergies: %s\n\nVisits:\n", patient->Name, patient->ID, getAllergies(*patient));
+    printAllVisits(patient->Visits);
+    printf("=========================\n");
 }
 
-void preOrderPrint(pInTree* node) {
-    if (node) {
-        printf("Name:%s, ID:%s", node->tpatient->Name, node->tpatient->ID);
-        preOrderPrint(node->left);
-        preOrderPrint(node->right);
-    }
+
+// Recursive function to perform in-order traversal and print patients
+void printPatientsInOrder(pInTree* node) {
+    if (node == NULL) return;
+    printPatientsInOrder(node->left);
+    printPatient(node->tpatient);
+    printPatientsInOrder(node->right);
 }
 
-void postOrderPrint(pInTree* node) {
-    if (node) {
-        postOrderPrint(node->left);
-        postOrderPrint(node->right);
-        printf("Name:%s, ID:%s",node->tpatient->Name,node->tpatient->ID);
-    }
+// Function to print all patients in the tree
+void printAllPatients(pTree* tree) {
+    printf("Printing all patients:\n");
+    printPatientsInOrder(tree->root);
 }

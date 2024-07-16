@@ -5,23 +5,16 @@ int main() {
     loadDoctors(&doctorList);
 
     // Print the loaded doctors
-    DoctorNode* current = doctorList;
-    while (current) {
-        printf("Full Name: %s, License Number: %s, Number of Patients: %d\n",
-            current->data.Name, current->data.nLicense, current->data.nPatients);
-        current = current->next;
-    }
+    printDoctors(doctorList);
 
-    // Clean up
-    deleteDoctorList(&doctorList);
 
     printf("\n\n");
 
-    pTree* root = NULL;
-    loadPatients(&root);
-
-    //preOrderPrint(root->root);
-
-
+    pTree* patientTree = createPatientTree();
+    loadPatients(doctorList ,&patientTree);
+    
+    printAllPatients(&patientTree);
+    // Clean up
+    deleteDoctorList(&doctorList);
     return 0;
 }

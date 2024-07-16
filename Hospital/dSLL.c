@@ -45,11 +45,11 @@ void deleteDoctorList(DoctorNode** head) {
     *head = NULL;
 }
 
-// Find a doctor by license number
-DoctorNode* findDoctor(DoctorNode* head, const char* license) {
+// Find a doctor by name 
+DoctorNode* findDoctor(DoctorNode* head, const char* name) {
     DoctorNode* current = head;
     while (current != NULL) {
-        if (strcmp(current->data.nLicense, license) == 0) {
+        if (strcmp(current->data.Name, name) == 0) {
             return current;
         }
         current = current->next;
