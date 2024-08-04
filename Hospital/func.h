@@ -25,6 +25,9 @@ pQueue loadLine();
 void updateFiles();
 
 //search patients via ID
+
+Patient* searchPatient() 
+
 //inside of Patient.c
 
 //prints an error accordinly 
