@@ -380,8 +380,6 @@ void displayError(int errorCode) {
     }
 }
 
-#include "func.h"
-
 // Function to assign a doctor to a patient case
 Doc* assignDoctor2case(DoctorNode* head) {
     if (head == NULL) {
@@ -404,6 +402,30 @@ Doc* assignDoctor2case(DoctorNode* head) {
 
 
 //menu options
+
+
+//2
+
+#include "func.h"
+
+// Function to display a patient's allergies
+void checkPatientAllergies(pTree* tree, const char* patientID) {
+    // Search for the patient in the tree
+    Patient* patient = searchPatient(tree, patientID);
+
+    if (patient == NULL) {
+        printf("Patient with ID %s not found.\n", patientID);
+        return;
+    }
+
+    // Display the patient's allergy information
+    printf("Allergies for patient %s (ID: %s): %s\n", patient->Name, patient->ID, getAllergiesStr(patient->Allergies));
+}
+
+
+
+
+
 
 //4 
 
@@ -450,8 +472,6 @@ void displayPatientAdmissions(Patient* patient) {
         free(temp);
     }
 }
-
-
 
 
 //5
