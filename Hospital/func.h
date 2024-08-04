@@ -25,10 +25,10 @@ pQueue loadLine();
 void updateFiles();
 
 //search patients via ID
+Patient* searchPatient();
 
-Patient* searchPatient() 
-
-//inside of Patient.c
+//assignDoctor2case
+Doc* assignDoctor2case(DoctorNode* head) {
 
 //prints an error accordinly 
 void displayError(char* errorType);
