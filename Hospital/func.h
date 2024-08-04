@@ -25,7 +25,7 @@ pQueue loadLine();
 void updateFiles();
 
 //search patients via ID
-Patient* searchPatient();
+Patient* searchPatient(pTree* tree, const char* id);
 
 //assignDoctor2case
 Doc* assignDoctor2case(DoctorNode* head) {
